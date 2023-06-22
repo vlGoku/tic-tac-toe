@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+#gameboard {
+  width: 600px;
+  height: 600px;
+  background-color: black;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#gameboard.cross .square:hover {
+}
+
+.square {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border: solid 2px black;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  height: 180px;
+  width: 180px;
+  border-radius: 50%;
+  border: 30px solid black;
+  box-sizing: border-box;
+}
+
+.cross {
+  height: 180px;
+  width: 180px;
+  position: relative;
+  transform: rotate(45deg);
+}
+
+.cross::before,
+.cross:after {
+  content: "";
+  position: absolute;
+  background-color: green;
+}
+
+.cross::before {
+  left: 50%;
+  width: 30%;
+  margin-left: -15%;
+  height: 100%;
+}
+
+.cross::after {
+  top: 50%;
+  height: 30%;
+  margin-top: -15%;
+  width: 100%;
+}
+
+.winning-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5rem;
+  flex-direction: column;
+}
+
+.winning-message button {
+  font-size: 3rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 15px 15px 15px 15px;
+  cursor: pointer;
+}
+
+.winning-message.show {
+  display: flex;
+}
