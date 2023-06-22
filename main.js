@@ -1,9 +1,6 @@
 "use strict";
 
-const gameboard = document.querySelector("#gameboard");
 const info = document.querySelector("#info");
-
-const startCells = ["", "", "", "", "", "", "", "", ""];
 
 let go = "circle";
 info.textContent = "Circle goes first";
@@ -11,6 +8,8 @@ info.textContent = "Circle goes first";
 const restartButton = document.querySelector("#restartButton");
 
 function createBoard() {
+  const startCells = ["", "", "", "", "", "", "", "", ""];
+  const gameboard = document.querySelector("#gameboard");
   startCells.forEach((_cell, index) => {
     const cellElement = document.createElement("div");
     cellElement.classList.add("square");

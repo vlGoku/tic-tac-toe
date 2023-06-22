@@ -16,9 +16,6 @@ body {
   flex-wrap: wrap;
 }
 
-#gameboard.cross .square:hover {
-}
-
 .square {
   width: 200px;
   height: 200px;
