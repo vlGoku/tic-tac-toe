@@ -1,6 +1,6 @@
 "use strict";
 
-const info = document.querySelector("#info");
+/* const info = document.querySelector("#info");
 
 let go = "circle";
 info.textContent = "Circle goes first";
@@ -18,8 +18,6 @@ function createBoard() {
     gameboard.append(cellElement);
   });
 }
-
-createBoard();
 
 function addGo(e) {
   const goDisplay = document.createElement("div");
@@ -63,9 +61,10 @@ function checkScore() {
     }
   });
   winningCombos.forEach((array) => {
-    const circleWins = array.every((cell) =>
+    const crossWins = array.every((cell) =>
       allSquares[cell].firstChild?.classList.contains("cross")
     );
+
     if (crossWins) {
       info.textContent = "Cross Wins!";
       allSquares.forEach((square) =>
@@ -81,3 +80,44 @@ function checkScore() {
 restartButton.addEventListener("click", () => {
   location.reload();
 });
+
+function init() {
+  createBoard();
+}
+init(); */
+
+class Player {
+  constructor(name) {
+    this.name = name;
+    this.sign = "";
+  }
+}
+
+class Game {
+  constructor() {
+    this.player1 = {};
+    this.player2 = {};
+    this.gameboard = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ];
+    this.winningConditions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+  }
+  placeSign(sign, x, y) {
+    this.gameboard[x][y] = sign;
+  }
+
+  createPlayer() {
+    let player1 = new Player();
+  }
+}
