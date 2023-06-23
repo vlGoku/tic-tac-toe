@@ -106,12 +106,7 @@ class Game {
       [0, 0, 0],
       [0, 0, 0],
     ];
-    this.winningConditions = [
-      [0, 1, 2],
-      [0, 0, 0],
-      [1, 1, 1],
-      [2, 2, 2],
-    ];
+    this.winningConditions = [[0, 1, 2], [0, 0, 0], [1, 1, 1], [2, 2, 2], []];
   }
 
   createPlayers(namePlayer1, namePlayer2) {
@@ -124,33 +119,57 @@ class Game {
   checkWin() {
     this.winningConditions.forEach((item) => {
       if (
-        (this.gameboard[0][item[0]] === this.player1.sign &&
+        (this.gameboard[0][item[0]] === this.player1.sign && //diagonal
           this.gameboard[1][item[1]] === this.player1.sign &&
           this.gameboard[2][item[2]] === this.player1.sign) ||
-        (this.gameboard[0][item[0]] === this.player1.sign &&
-          this.gameboard[0][item[0]] === this.player1.sign &&
-          this.gameboard[0][item[0]] === this.player1.sign) ||
-        (this.gameboard[1][item[1]] === this.player1.sign &&
+        (this.gameboard[0][item[2]] === this.player1.sign && //diagonal
           this.gameboard[1][item[1]] === this.player1.sign &&
-          this.gameboard[1][item[1]] === this.player1.sign) ||
-        (this.gameboard[2][item[2]] === this.player1.sign &&
-          this.gameboard[2][item[2]] === this.player1.sign &&
+          this.gameboard[2][item[0]] === this.player1.sign) ||
+        (this.gameboard[0][item[0]] === this.player1.sign && //horizontal
+          this.gameboard[0][item[1]] === this.player1.sign &&
+          this.gameboard[0][item[2]] === this.player1.sign) ||
+        (this.gameboard[1][item[0]] === this.player1.sign && //horizontal
+          this.gameboard[1][item[1]] === this.player1.sign &&
+          this.gameboard[1][item[2]] === this.player1.sign) ||
+        (this.gameboard[2][item[0]] === this.player1.sign && //horizontal
+          this.gameboard[2][item[1]] === this.player1.sign &&
+          this.gameboard[2][item[2]] === this.player1.sign) ||
+        (this.gameboard[0][item[0]] === this.player1.sign && //Vertical
+          this.gameboard[1][item[0]] === this.player1.sign &&
+          this.gameboard[2][item[0]] === this.player1.sign) ||
+        (this.gameboard[0][item[1]] === this.player1.sign && //Vertical
+          this.gameboard[1][item[1]] === this.player1.sign &&
+          this.gameboard[2][item[1]] === this.player1.sign) ||
+        (this.gameboard[0][item[2]] === this.player1.sign && //Vertical
+          this.gameboard[1][item[2]] === this.player1.sign &&
           this.gameboard[2][item[2]] === this.player1.sign)
       ) {
         this.player1.hasWon = true;
       }
       if (
-        (this.gameboard[0][item[0]] === this.player2.sign &&
+        (this.gameboard[0][item[0]] === this.player2.sign && //diagonal
           this.gameboard[1][item[1]] === this.player2.sign &&
           this.gameboard[2][item[2]] === this.player2.sign) ||
-        (this.gameboard[0][item[0]] === this.player2.sign &&
-          this.gameboard[0][item[0]] === this.player2.sign &&
-          this.gameboard[0][item[0]] === this.player2.sign) ||
-        (this.gameboard[1][item[1]] === this.player2.sign &&
+        (this.gameboard[0][item[2]] === this.player2.sign && //diagonal
           this.gameboard[1][item[1]] === this.player2.sign &&
-          this.gameboard[1][item[1]] === this.player2.sign) ||
-        (this.gameboard[2][item[2]] === this.player2.sign &&
-          this.gameboard[2][item[2]] === this.player2.sign &&
+          this.gameboard[2][item[0]] === this.player2.sign) ||
+        (this.gameboard[0][item[0]] === this.player2.sign && //horizontal
+          this.gameboard[0][item[1]] === this.player2.sign &&
+          this.gameboard[0][item[2]] === this.player2.sign) ||
+        (this.gameboard[1][item[0]] === this.player2.sign && //horizontal
+          this.gameboard[1][item[1]] === this.player2.sign &&
+          this.gameboard[1][item[2]] === this.player2.sign) ||
+        (this.gameboard[2][item[0]] === this.player2.sign && //horizontal
+          this.gameboard[2][item[1]] === this.player2.sign &&
+          this.gameboard[2][item[2]] === this.player2.sign) ||
+        (this.gameboard[0][item[0]] === this.player2.sign && //Vertical
+          this.gameboard[1][item[0]] === this.player2.sign &&
+          this.gameboard[2][item[0]] === this.player2.sign) ||
+        (this.gameboard[0][item[1]] === this.player2.sign && //Vertical
+          this.gameboard[1][item[1]] === this.player2.sign &&
+          this.gameboard[2][item[1]] === this.player2.sign) ||
+        (this.gameboard[0][item[2]] === this.player2.sign && //Vertical
+          this.gameboard[1][item[2]] === this.player2.sign &&
           this.gameboard[2][item[2]] === this.player2.sign)
       ) {
         this.player2.hasWon = true;
@@ -196,7 +215,7 @@ class Game {
   game.placeSign("X", 0, 2);
   console.log(game.gameboard);
   console.log(game.checkDraw());
-  game.checkEnd();
+  console.log(game.checkWin());
   console.log(game.player1);
   console.log(game.player2);
 })();
