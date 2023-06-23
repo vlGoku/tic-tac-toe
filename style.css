@@ -8,6 +8,18 @@ body {
   flex-direction: column;
 }
 
+#game {
+  display: none;
+}
+
+#game.show {
+  display: flex;
+}
+
+#front.hide {
+  display: none;
+}
+
 #gameboard {
   width: 600px;
   height: 600px;
@@ -16,7 +28,7 @@ body {
   flex-wrap: wrap;
 }
 
-.square {
+.cell {
   width: 200px;
   height: 200px;
   background-color: white;
