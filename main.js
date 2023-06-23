@@ -90,6 +90,10 @@ class Player {
   constructor(name) {
     this.name = name;
     this.sign = "";
+    this.hasWon = false;
+  }
+  setSign(sign) {
+    this.sign = sign;
   }
 }
 
@@ -104,20 +108,95 @@ class Game {
     ];
     this.winningConditions = [
       [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
+      [0, 0, 0],
+      [1, 1, 1],
+      [2, 2, 2],
     ];
   }
+
+  createPlayers(namePlayer1, namePlayer2) {
+    this.player1 = new Player(namePlayer1);
+    this.player2 = new Player(namePlayer2);
+    this.player1.setSign("X");
+    this.player2.setSign("O");
+  }
+
+  checkWin() {
+    this.winningConditions.forEach((item) => {
+      if (
+        (this.gameboard[0][item[0]] === this.player1.sign &&
+          this.gameboard[1][item[1]] === this.player1.sign &&
+          this.gameboard[2][item[2]] === this.player1.sign) ||
+        (this.gameboard[0][item[0]] === this.player1.sign &&
+          this.gameboard[0][item[0]] === this.player1.sign &&
+          this.gameboard[0][item[0]] === this.player1.sign) ||
+        (this.gameboard[1][item[1]] === this.player1.sign &&
+          this.gameboard[1][item[1]] === this.player1.sign &&
+          this.gameboard[1][item[1]] === this.player1.sign) ||
+        (this.gameboard[2][item[2]] === this.player1.sign &&
+          this.gameboard[2][item[2]] === this.player1.sign &&
+          this.gameboard[2][item[2]] === this.player1.sign)
+      ) {
+        this.player1.hasWon = true;
+      }
+      if (
+        (this.gameboard[0][item[0]] === this.player2.sign &&
+          this.gameboard[1][item[1]] === this.player2.sign &&
+          this.gameboard[2][item[2]] === this.player2.sign) ||
+        (this.gameboard[0][item[0]] === this.player2.sign &&
+          this.gameboard[0][item[0]] === this.player2.sign &&
+          this.gameboard[0][item[0]] === this.player2.sign) ||
+        (this.gameboard[1][item[1]] === this.player2.sign &&
+          this.gameboard[1][item[1]] === this.player2.sign &&
+          this.gameboard[1][item[1]] === this.player2.sign) ||
+        (this.gameboard[2][item[2]] === this.player2.sign &&
+          this.gameboard[2][item[2]] === this.player2.sign &&
+          this.gameboard[2][item[2]] === this.player2.sign)
+      ) {
+        this.player2.hasWon = true;
+      }
+    });
+  }
+
+  checkDraw() {
+    let draw = true;
+    this.gameboard.forEach((field) => {
+      if (field.includes(0)) {
+        draw = false;
+      }
+    });
+    return draw;
+  }
+
+  checkEnd() {
+    return this.checkWin();
+  }
+
   placeSign(sign, x, y) {
     this.gameboard[x][y] = sign;
   }
 
-  createPlayer() {
-    let player1 = new Player();
+  clearGame() {
+    this.gameboard = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ];
+    this.score = 0;
   }
 }
+
+(function init() {
+  const game = new Game();
+  game.createPlayers("Marko", "Susi");
+  game.placeSign("X", 0, 0);
+  game.placeSign("O", 1, 0);
+  game.placeSign("X", 0, 1);
+  game.placeSign("O", 1, 1);
+  game.placeSign("X", 0, 2);
+  console.log(game.gameboard);
+  console.log(game.checkDraw());
+  game.checkEnd();
+  console.log(game.player1);
+  console.log(game.player2);
+})();
