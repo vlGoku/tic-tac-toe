@@ -164,5 +164,22 @@ class Game {
 
 (function init() {
   const game = new Game();
-  let startButton = document.querySelector("#startGame");
+
+  const startButton = document.querySelector("#startGame");
+  const cell = document.querySelector(".cell");
+  const restartButton = document.querySelector("#restartButton");
+
+  const winningMessage = document.querySelector("#winningMessage");
+  const game_1 = document.querySelector("#game");
+  const front = document.querySelector("#front");
+
+  startButton.addEventListener("click", () => {
+    game_1.classList.add("show");
+    front.classList.add("hide");
+    winningMessage.classList.add("show");
+  });
+
+  restartButton.addEventListener("click", () => {
+    location.reload();
+  });
 })();
