@@ -7,13 +7,19 @@
     <script src="main.js" defer></script>
   </head>
   <body>
+    <h1 id="ueberschrift">Tic-Tac-Toe</h1>
     <div id="front" class="">
       <input id="player1" type="text" placeholder="Player 1" />
       <input id="player2" type="text" placeholder="Player 2" />
       <button id="startGame">Start Game</button>
     </div>
+    <h2 id="erklaerung">
+      Die Spielregeln von Tic Tac Toe sind ziemlich einfach. Zwei Spieler
+      platzieren ihre X und O-Steine auf dem 3x3-Spielbrett und versuchen, eine
+      horizontale, vertikale oder diagonale Linie aus drei Steinen zu bilden.
+      Wenn ein Spieler dies schafft, gewinnt er/sie.
+    </h2>
     <div id="game" class="">
-      <p id="info"></p>
       <div id="gameboard">
         <div class="cell" data-index="0"></div>
         <div class="cell" data-index="1"></div>
@@ -26,6 +32,7 @@
         <div class="cell" data-index="8"></div>
       </div>
     </div>
+    <p id="info"></p>
     <div class="winning-message" id="winningMessage">
       <div data-winning-message-text></div>
       <button id="restartButton">Restart</button>

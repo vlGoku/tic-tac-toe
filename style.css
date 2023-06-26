@@ -7,6 +7,27 @@ body {
   height: 100vh;
   flex-direction: column;
 }
+#ueberschrift {
+  color: peachpuff;
+  font-size: 3rem;
+}
+
+#front {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#front.hide,
+#erklaerung.hide {
+  display: none;
+}
+
+#erklaerung {
+  padding-top: 30px;
+  display: flex;
+  width: 700px;
+}
 
 #game {
   display: none;
@@ -14,10 +35,6 @@ body {
 
 #game.show {
   display: flex;
-}
-
-#front.hide {
-  display: none;
 }
 
 #gameboard {
@@ -43,7 +60,7 @@ body {
   height: 180px;
   width: 180px;
   border-radius: 50%;
-  border: 30px solid black;
+  border: 30px solid red;
   box-sizing: border-box;
 }
 
@@ -96,6 +113,7 @@ body {
   border: 1px solid black;
   border-radius: 15px 15px 15px 15px;
   cursor: pointer;
+  margin-top: 30px;
 }
 
 .winning-message.show {

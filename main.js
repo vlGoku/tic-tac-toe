@@ -119,6 +119,7 @@ class Game {
     this.player2 = new Player(namePlayer2);
     this.player1.setSign("X");
     this.player2.setSign("O");
+    this.go = player1;
   }
 
   checkWin() {
@@ -141,15 +142,18 @@ class Game {
   }
 
   checkDraw() {
-    let draw = true;
-    if (this.gameboard.includes(0)) {
-      draw = false;
+    let draw = false;
+    if (!this.gameboard.includes(0)) {
+      draw = true;
     }
     return draw;
   }
 
   checkEnd() {
-    return this.checkWin();
+    let isEnd = false;
+    this.checkWin();
+    if (this.player1.hasWon || this.player2.hasWon) isEnd = true;
+    return isEnd;
   }
 
   placeSign(sign, x) {
@@ -158,7 +162,6 @@ class Game {
 
   clearGame() {
     this.gameboard = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    this.score = 0;
   }
 }
 
@@ -166,20 +169,74 @@ class Game {
   const game = new Game();
 
   const startButton = document.querySelector("#startGame");
-  const cell = document.querySelector(".cell");
+  const cells = document.querySelectorAll(".cell");
   const restartButton = document.querySelector("#restartButton");
 
   const winningMessage = document.querySelector("#winningMessage");
   const game_1 = document.querySelector("#game");
   const front = document.querySelector("#front");
+  const erklaerung = document.querySelector("#erklaerung");
+  const ueberschrift = document.querySelector("#ueberschrift");
+
+  const player1 = document.querySelector("#player1");
+  const player2 = document.querySelector("#player2");
+  const winningMessageTextElement = document.querySelector(
+    "[data-winning-message-text]"
+  );
+  const info = document.querySelector("#info");
+
+  let go = "cross";
 
   startButton.addEventListener("click", () => {
     game_1.classList.add("show");
     front.classList.add("hide");
-    winningMessage.classList.add("show");
+    erklaerung.classList.add("hide");
+    game.createPlayers(player1.value, player2.value);
+    info.innerHTML = player1.value + " ist an der Reihe";
+    ueberschrift.style.color = "green";
   });
-
+  for (let cell of cells) {
+    cell.addEventListener("click", placeSignOnBoard);
+  }
   restartButton.addEventListener("click", () => {
     location.reload();
+    player1 = "";
+    player2 = "";
   });
+
+  function placeSignOnBoard(e) {
+    let signIndex = e.target.dataset.index;
+    if (go === "cross") {
+      game.placeSign("X", signIndex);
+    } else {
+      game.placeSign("O", signIndex);
+    }
+
+    const goDisplay = document.createElement("div");
+    goDisplay.classList.add(go);
+    e.target.append(goDisplay);
+    go = go === "circle" ? "cross" : "circle";
+    if (go === "circle") {
+      ueberschrift.style.color = "red";
+      info.innerHTML = player2.value + " ist an der Reihe";
+    } else {
+      ueberschrift.style.color = "green";
+      info.innerHTML = player1.value + " ist an der Reihe";
+    }
+    e.target.removeEventListener("click", placeSignOnBoard);
+
+    game.checkEnd();
+    game.checkDraw();
+
+    if (game.player1.hasWon == true) {
+      winningMessage.classList.add("show");
+      winningMessageTextElement.innerHTML = game.player1.name + " hat gewonnen";
+    } else if (game.player2.hasWon == true) {
+      winningMessage.classList.add("show");
+      winningMessageTextElement.innerHTML = game.player2.name + " hat gewonnen";
+    } else if (game.checkDraw()) {
+      winningMessage.classList.add("show");
+      winningMessageTextElement.innerHTML = "Es ist ein unentschieden";
+    }
+  }
 })();
